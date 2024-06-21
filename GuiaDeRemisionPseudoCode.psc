@@ -1,11 +1,32 @@
-Funcion bool_Authentication <- VerifyUser ( DocUser, PassUser )
+Funcion bool_AuthenticationDoc <- VerifyDocument ( Doc )
+	
+Fin Funcion
 
+Funcion document <- VerifyTypeDocument ( Doc, type )
+	Segun Doc Hacer
+		1://	RUC
+			Si Doc >  99999999999 o Doc < 10000000000 Entonces
+				document <- -1
+			SiNo
+				document <- doc
+			Fin Si
+		2://	DNI
+			Si Doc >  99999999 o Doc < 10000000 Entonces
+				document <- -1
+			SiNo
+				document <- doc
+			Fin Si
+	Fin Segun
+Fin Funcion
+
+Funcion bool_AuthenticationUser <- VerifyUser ( DocUser, PassUser )
 	Si DocUser = 7268 Y PassUser = 2103 Entonces //Verificacion en la base de datos
-		bool_Authentication<-Verdadero
+		bool_AuthenticationUser<-Verdadero
 	SiNo
-		bool_Authentication<-Falso
+		bool_AuthenticationUser<-Falso
 	Fin Si
 Fin Funcion
+
 
 Funcion running <- Login 
 	//Login
@@ -34,6 +55,34 @@ Funcion running <- Login
 	
 	Escribir ("Bienvenido de vuelta")
 	running = Falso
+Fin Funcion
+
+Funcion running <- RecoverPass
+	Escribir ("Tipo de documento")
+	Escribir ("1. RUC")
+	Escribir ("2. DNI")
+	Leer Tipo_Doc
+	
+	Mientras (Tipo_Doc < 1  o  Tipo_Doc > 2) Hacer
+		Escribir ("Ingrese una opcion valida")
+		Leer Tipo_Doc
+	Fin Mientras
+	
+	Escribir  ("Escriba el documento al cual esta relacionado su cuenta")
+	Leer Usuario_Doc
+	Usuario_Doc <- VerifyTypeDocument(Usuario_Doc, Tipo_Doc)
+	Si Usuario_Doc <> -1 Entonces
+		Escribir ("El documento escrito no coincide con su tipo")
+	SiNo
+		Si VerifyDocument(Usuario_Doc) Entonces
+			Escribir ("Escriba su contraseña")
+			Escribir ("Escriba su contraseña")
+		SiNo
+			acciones_por_falso
+		Fin Si
+		Escribir ("")
+	Fin Si
+	running = Verdadero
 Fin Funcion
 
 Algoritmo GuiaDeRemision
