@@ -6,6 +6,87 @@ Funcion  enviarCorreo ( email )
 	//enviar correo
 Fin Funcion
 
+Funcion EmitirGuiaRemision
+    // Llamada a la función Documentacion
+    Documentacion()
+    // Llamada a la función Bienes
+    Bienes()
+    // Llamada a la función Modalidad
+    Modalidad()
+    Escribir("Guía de Remisión emitida correctamente")
+Fin Funcion
+
+Funcion Documentacion
+    Escribir("Ingrese el tipo de documento")
+    Escribir("1. RUC")
+    Escribir("2. DNI")
+    Leer tipo_documento
+    
+    Escribir("Ingrese el número de documento")
+    Leer numero_documento
+    
+    Escribir("Ingrese el punto de partida")
+    Escribir("Departamento")
+    Leer partida_departamento
+    Escribir("Provincia")
+    Leer partida_provincia
+    Escribir("Distrito")
+    Leer partida_distrito
+    Escribir("Dirección")
+    Leer partida_direccion
+    
+    Escribir("Ingrese el punto de llegada")
+    Escribir("Departamento")
+    Leer llegada_departamento
+    Escribir("Provincia")
+    Leer llegada_provincia
+    Escribir("Distrito")
+    Leer llegada_distrito
+    Escribir("Dirección")
+    Leer llegada_direccion
+Fin Funcion
+
+Funcion Bienes
+    Escribir("Ingrese la información del producto a transportar")
+    Escribir("Código del producto")
+    Leer codigo_producto
+    Escribir("Cantidad")
+    Leer cantidad_producto
+    Escribir("Unidad")
+    Leer unidad_producto
+    Escribir("Peso bruto total")
+    Leer peso_bruto_total
+    Escribir("Unidad de peso")
+    Leer unidad_peso
+Fin Funcion
+
+Funcion Modalidad
+    Escribir("Seleccione la modalidad de transporte")
+    Escribir("1. Público")
+    Escribir("2. Privado")
+    Leer modalidad_transporte
+    
+    Escribir("Ingrese los datos del conductor")
+    Escribir("Licencia de conducir")
+    Leer licencia_conductor
+    Escribir("Tipo de documento")
+    Escribir("1. RUC")
+    Escribir("2. DNI")
+    Leer tipo_documento_conductor
+    Escribir("Documento")
+    Leer documento_conductor
+    Escribir("Nombre")
+    Leer nombre_conductor
+    Escribir("Apellidos")
+    Leer apellidos_conductor
+    
+    Escribir("Ingrese la placa del vehículo")
+    Leer placa_vehiculo
+    
+    Escribir("Ingrese la fecha del traslado")
+    Leer fecha_traslado
+Fin Funcion
+
 Funcion bool_AuthenticationEmail <- VerifyExistingEmail ( Email )
 	Si DocUser = 7268 Entonces //Verificacion de la existencia en la base de datos (Consulta SQL)
 		bool_AuthenticationEmail<-Verdadero
@@ -59,6 +140,7 @@ Funcion running <- Login
 	Leer Usuario_pass
 	Mientras !VerifyUser(Usuario_Doc, Usuario_pass)  Hacer
 		Escribir ("El documento y la contraseña no coinciden")
+		Escribir  ("Ingrese nuevamente")
 		Escribir ("Documento")
 		Leer Usuario_Doc
 		Escribir ("Contraseña")
@@ -96,7 +178,7 @@ Fin Funcion
 
 Algoritmo GuiaDeRemision
 	running = Verdadero
-	Mientras running Hacer
+	Mientras running Hacer //Primera Pantalla
 		Escribir ("Sistema de Guia de Remision")
 		Escribir ("1. Login")
 		Escribir ("2. Recuperacion de contraseña")
@@ -106,24 +188,29 @@ Algoritmo GuiaDeRemision
 			1:
 				running = Login()
 			2:
-				Escribir ("Recuperacion de pass")
+				running = RecoverPass()
 			3:
-				Escribir ("Registro de usuario")
+				Escribir ("Registro de usuario") //
 			De Otro Modo:
 				Escribir ("Ingrese una opcion valida")
 		Fin Segun
 	Fin Mientras
 	
-
-	
-	//Registro de Usuario
-	
-	//Agregar proveedor
-	
-	//Documento de proveedor
-	//Bienes a transportar
-	//Punto de llegada y punto de partida
-	//Modalida de traslado
-	
-	//Emision de Guia de remision
+	running = Verdadero
+	Mientras running Hacer //Segunda Pantalla
+		Escribir ("Sistema de Guia de Remision")
+		Escribir ("Sesion iniciada")
+		Escribir ("1. Emitir Guia de Remision de Compra")
+		Escribir ("2. Salir")
+		Leer option
+		Segun option Hacer
+			1:
+				EmitirGuiaRemision()
+			2:
+				Escribir("Sesión finalizada")
+                running = Falso
+			De Otro Modo:
+				Escribir ("Ingrese una opcion valida")
+		Fin Segun
+	Fin Mientras
 FinAlgoritmo
