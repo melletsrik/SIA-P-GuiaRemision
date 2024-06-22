@@ -1,5 +1,17 @@
-Funcion bool_AuthenticationDoc <- VerifyDocument ( Doc )
-	
+Funcion setPassword ( pass, Email )
+	//Modify en la base de datos
+Fin Funcion
+
+Funcion  enviarCorreo ( email )
+	//enviar correo
+Fin Funcion
+
+Funcion bool_AuthenticationEmail <- VerifyExistingEmail ( Email )
+	Si DocUser = 7268 Entonces //Verificacion de la existencia en la base de datos (Consulta SQL)
+		bool_AuthenticationEmail<-Verdadero
+	SiNo
+		bool_AuthenticationEmail<-Falso
+	Fin Si
 Fin Funcion
 
 Funcion document <- VerifyTypeDocument ( Doc, type )
@@ -58,29 +70,26 @@ Funcion running <- Login
 Fin Funcion
 
 Funcion running <- RecoverPass
-	Escribir ("Tipo de documento")
-	Escribir ("1. RUC")
-	Escribir ("2. DNI")
-	Leer Tipo_Doc
-	
-	Mientras (Tipo_Doc < 1  o  Tipo_Doc > 2) Hacer
-		Escribir ("Ingrese una opcion valida")
-		Leer Tipo_Doc
-	Fin Mientras
-	
-	Escribir  ("Escriba el documento al cual esta relacionado su cuenta")
-	Leer Usuario_Doc
-	Usuario_Doc <- VerifyTypeDocument(Usuario_Doc, Tipo_Doc)
-	Si Usuario_Doc <> -1 Entonces
-		Escribir ("El documento escrito no coincide con su tipo")
+	Escribir  ("Escriba el correo electronico al cual esta relacionado su cuenta")
+	Leer email_User
+	codeRecover<-1234 //Numero generado aleatoriamente de 4 digitos
+	Si VerifyExistingEmail(email_User) Entonces
+		
+		enviarCorreo(email_User)//Funcion para enviar el codigo a su correo
+		Escribir ("Escriba el codigo que se le acaba de mandar al correo electronico")
+		
+		Leer codeReceived
+		Mientras codeReceived <> codeRecover Hacer
+			Escribir  ("El codigo es incorrecto")
+			Escribir ("Escriba el codigo que se le acaba de mandar al correo electronico")
+			Leer codeReceived
+		Fin Mientras
+		Escribir ("Verificacion correcta")
+		Escribir ("Escriba la nueva contraseña para su cuenta")
+		Leer newPassword
+		setPassword(newPassword, email_User)
 	SiNo
-		Si VerifyDocument(Usuario_Doc) Entonces
-			Escribir ("Escriba su contraseña")
-			Escribir ("Escriba su contraseña")
-		SiNo
-			acciones_por_falso
-		Fin Si
-		Escribir ("")
+		Escribir ("El correo escrito no se encuentra en los registros")
 	Fin Si
 	running = Verdadero
 Fin Funcion
@@ -105,7 +114,7 @@ Algoritmo GuiaDeRemision
 		Fin Segun
 	Fin Mientras
 	
-	//Recuperacion de Contraseña
+
 	
 	//Registro de Usuario
 	
