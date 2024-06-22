@@ -109,6 +109,18 @@ Funcion document <- VerifyTypeDocument ( Doc, type )
 			SiNo
 				document <- doc
 			Fin Si
+		3://	Licencia de conducir
+			Si Doc >  9999999 o Doc < 1000000 Entonces
+				document <- -1
+			SiNo
+				document <- doc
+			Fin Si	
+		4://	Licencia de conducir
+			Si Doc >  9999 o Doc < 10000000000000000000 Entonces
+				document <- -1
+			SiNo
+				document <- doc
+			Fin Si	
 	Fin Segun
 Fin Funcion
 
@@ -127,28 +139,36 @@ Funcion running <- Login
 	Escribir ("Tipo de documento")
 	Escribir ("1. RUC")
 	Escribir ("2. DNI")
+	Escribir ("3. Licencia de conducir")
+	Escribir ("4. Carnet de Extranjeria")
+	
 	Leer Tipo_Doc
 	
-	Mientras (Tipo_Doc < 1  o  Tipo_Doc > 2) Hacer
+	Mientras (Tipo_Doc < 1  o  Tipo_Doc > 4) Hacer
 		Escribir ("Ingrese una opcion valida")
 		Leer Tipo_Doc
 	Fin Mientras
 	
 	Escribir ("Documento")
 	Leer Usuario_Doc
+
 	Escribir ("Contraseña")
 	Leer Usuario_pass
-	Mientras !VerifyUser(Usuario_Doc, Usuario_pass)  Hacer
-		Escribir ("El documento y la contraseña no coinciden")
-		Escribir  ("Ingrese nuevamente")
-		Escribir ("Documento")
-		Leer Usuario_Doc
-		Escribir ("Contraseña")
-		Leer Usuario_pass
-	Fin Mientras
-	
-	Escribir ("Bienvenido de vuelta")
-	running = Falso
+	Si VerifyTypeDocument(Usuario_Doc, Tipo_Doc) = -1 Entonces
+		Escribir ("El documento que introdujo no es del mismo tipo que escogio")
+		running = Verdadero
+	SiNo
+		Mientras !VerifyUser(Usuario_Doc, Usuario_pass)  Hacer
+			Escribir ("El documento y la contraseña no coinciden")
+			Escribir  ("Ingrese nuevamente")
+			Escribir ("Documento")
+			Leer Usuario_Doc
+			Escribir ("Contraseña")
+			Leer Usuario_pass
+			Escribir ("Bienvenido de vuelta")
+			running = Falso
+		Fin Mientras
+	Fin Si
 Fin Funcion
 
 Funcion running <- RecoverPass
