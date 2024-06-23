@@ -189,7 +189,7 @@ INSERT INTO MAE_PROVINCIA (ID_PROVINCIA, ID_DEPARTAMENTO, NOMBRE) VALUES
 (13, 3, 'Mariscal Nieto'),
 (14, 3, 'General Sánchez Cerro'),
 (15, 3, 'Ilo');
--Distritos de Moquegua
+--Distritos de Moquegua
 INSERT INTO MAE_DISTRITO (ID_DISTRITO, ID_PROVINCIA, NOMBRE) VALUES 
 -- Distritos de la provincia de Mariscal Nieto
 (136, 13, 'Moquegua'),
