@@ -413,6 +413,19 @@ INSERT INTO MAE_PRODUCTO (ID_PRODUCTO, ID_UNIDAD, NOMBRE, DESCRIPCION, PESO) VAL
 (14, 2, 'Zapatos deportivos', 'Zapatos deportivos para running', 1.1),
 (15, 7, 'Jabón líquido', 'Jabón líquido antibacterial, botella 500 ml', 0.5);
 
+-- Insertando registros en la tabla MAE_DIRECCION para los distritos ficticios en Arequipa
+INSERT INTO MAE_DIRECCION (ID_DIRECCION, ID_DISTRITO, REFERENCIA) VALUES 
+(136, 1, 'Av. Simón Bolívar 1234'),
+(153, 2, 'Jr. Lima 567'),
+(171, 3, 'Calle Comercio 890'),
+(191, 4, 'Av. Cusco 456'),
+(223, 5, 'Jr. Tacna 789'),
+(239, 6, 'Av. Moquegua 901'),
+(206, 7, 'Jr. Juliaca 234'),
+(227, 8, 'Av. Ayaviri 567'),
+(243, 9, 'Jr. Puno 890'),
+(252, 10, 'Av. Ilave 901');
+
 INSERT INTO MAE_CLIENTE (ID_CLIENTE, ID_TIPO_DOCUMENTO, ID_DOCUMENTO, ID_DIRECCION, NUM_DOCUMENTO, DIRECCION, NOMBRE, TELEFONO) VALUES 
 (1, 1, 12345678, 136, '12345678', 'Av. Puno 567, Puno', 'Panadería San Martín', '951234567'),
 (2, 2, 87654321, 153, '20123456789', 'Av. Lima 890, Lima', 'Tienda Mi Hogar', '954321987'),
