@@ -442,3 +442,21 @@ INSERT INTO MAE_PROVEEDOR (ID_PROVEEDOR, ID_TIPO_DOCUMENTO, ID_DIRECCION, DIRECC
 (1, 2, 136, 'Av. Simón Bolívar 1234, Arequipa', 'Distribuidora La Unión SAC', '958746321', 'info@distribuidoralu.com'),
 (2, 1, 153, 'Jr. Lima 567, Ilo', 'Ferretería El Progreso', '972345678', 'ventas@ferreteriaelprogreso.com'),
 (3, 2, 171, 'Calle Comercio 890, Puno', 'Productos del Altiplano EIRL', '951234567', 'contacto@productosaltiplano.com');
+
+-- Tabla de cabecera de guía de remisión
+INSERT INTO TRS_CABECERA_GR (ID_CABECERA, ID_PROVEEDOR, ID_CLIENTE, ID_TRANSPORTISTA, ID_VEHICULO, NUM_GUIA, FECHA_EMI, HORA_EMI, MOTIVO_TRAS, MODALIDAD) VALUES
+(1, 1, 1, 1, 1, 'GR123456', '2024-06-22', '10:00:00', 'Entrega de productos', 'Flete'),
+(2, 2, 2, 2, 2, 'GR123457', '2024-06-22', '11:00:00', 'Transporte de mercadería', 'Flete'),
+(3, 3, 3, 3, 3, 'GR123458', '2024-06-22', '12:00:00', 'Distribución', 'Flete');
+
+-- Tabla de detalle de guía de remisión
+INSERT INTO TRS_DETALLE_GR (ID_CABECERA, ID_PRODUCTO, NUM_FACTURA, CANTIDAD_PROD, PESO_TOTAL) VALUES
+(1, 1, 'F123456', 10, 15.0),
+(1, 2, 'F123457', 5, 11.5),
+(1, 3, 'F123458', 2, 20.0),
+(2, 4, 'F123459', 8, 6.0),
+(2, 5, 'F123460', 10, 12.0),
+(2, 6, 'F123461', 7, 17.5),
+(3, 7, 'F123462', 5, 5.0),
+(3, 8, 'F123463', 12, 9.0),
+(3, 9, 'F123464', 3, 6.3);
