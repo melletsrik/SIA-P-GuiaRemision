@@ -396,10 +396,10 @@ insert into mae_cliente (id_cliente, id_tipo_documento, id_direccion, direccion,
 ('45678901', 1, 7, 'Av. Tacna 111', 'Juan Sanchez', '321098765'),
 ('56789012', 1, 8, 'Jr. Moquegua 222', 'Pedro Torres', '210987654');
 -- mae_proveedor
-insert into mae_proveedor (id_proveedor, id_tipo_documento, id_direccion, direccion, nombre, telefono, correo) values 
-('20123456789', 4, 1, 'Av. Benavides 123', 'Proveedor Uno', '987654321', 'proveedor1@example.com'),
-('20234567890', 4, 2, 'Jr. Santa 456', 'Proveedor Dos', '876543210', 'proveedor2@example.com'),
-('20345678901', 4, 3, 'Calle Luna 789', 'Proveedor Tres', '765432109', 'proveedor3@example.com');
+insert into mae_proveedor (id_proveedor, id_tipo_documento, nombre, telefono, correo) values 
+('20123456789', 4, 'Proveedor Uno', '987654321', 'proveedor1@example.com'),
+('20234567890', 4, 'Proveedor Dos', '876543210', 'proveedor2@example.com'),
+('20345678901', 4, 'Proveedor Tres', '765432109', 'proveedor3@example.com');
 -- mae_producto
 insert into mae_producto (id_producto, id_unidad, nombre, descripcion, peso) values 
 ('P001', 1, 'Producto 1', 'Descripción del producto 1', 1.5),
