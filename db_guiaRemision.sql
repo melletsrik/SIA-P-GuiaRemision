@@ -1,127 +1,113 @@
--- Tabla de Departamentos
-CREATE TABLE MAE_DEPARTAMENTO (
-  ID_DEPARTAMENTO INTEGER PRIMARY KEY,
-  NOMBRE VARCHAR(50) NOT NULL
+create table mae_departamento (
+  id_departamento integer primary key,
+  nombre varchar(50) not null
 );
 
--- Tabla de Provincias
-CREATE TABLE MAE_PROVINCIA (
-  ID_PROVINCIA INTEGER PRIMARY KEY,
-  ID_DEPARTAMENTO INTEGER NOT NULL,
-  NOMBRE VARCHAR(50) NOT NULL,
-  FOREIGN KEY (ID_DEPARTAMENTO) REFERENCES MAE_DEPARTAMENTO (ID_DEPARTAMENTO)
+create table mae_provincia (
+  id_provincia integer primary key,
+  id_departamento integer not null,
+  nombre varchar(50) not null,
+  foreign key (id_departamento) references mae_departamento (id_departamento)
 );
 
-
--- Tabla de Distritos
-CREATE TABLE MAE_DISTRITO (
-  ID_DISTRITO INTEGER PRIMARY KEY,
-  ID_PROVINCIA INTEGER NOT NULL,
-  NOMBRE VARCHAR(50) NOT NULL,
-  FOREIGN KEY (ID_PROVINCIA) REFERENCES MAE_PROVINCIA (ID_PROVINCIA)
+create table mae_distrito (
+  id_distrito integer primary key,
+  id_provincia integer not null,
+  nombre varchar(50) not null,
+  foreign key (id_provincia) references mae_provincia (id_provincia)
 );
 
--- Tabla de Direcciones
-CREATE TABLE MAE_DIRECCION (
-  ID_DIRECCION INTEGER PRIMARY KEY,
-  ID_DISTRITO INTEGER NOT NULL,
-  REFERENCIA VARCHAR(200),
-  FOREIGN KEY (ID_DISTRITO) REFERENCES MAE_DISTRITO (ID_DISTRITO)
+create table mae_tipo_documento (
+  id_tipo_documento integer primary key,
+  descripcion varchar(50) not null
 );
 
--- Tabla de tipos de documentos
-CREATE TABLE MAE_TIPO_DOCUMENTO (
-  ID_TIPO_DOCUMENTO INTEGER PRIMARY KEY,
-  DESCRIPCION VARCHAR(50) NOT NULL
+create table mae_unidades (
+  id_unidad integer primary key,
+  descripcion varchar(50) not null
 );
 
--- Tabla de unidades
-CREATE TABLE MAE_UNIDADES (
-  ID_UNIDAD INTEGER PRIMARY KEY,
-  DESCRIPCION VARCHAR(50) NOT NULL
+create table mae_proveedor (
+  id_proveedor varchar(20) primary key not null,
+  id_tipo_documento integer not null,
+  id_direccion integer not null,
+  direccion varchar(200) not null,
+  nombre varchar(20) not null,
+  telefono varchar(12) not null,
+  correo varchar(50),
+  foreign key (id_tipo_documento) references mae_tipo_documento (id_tipo_documento),
+  foreign key (id_direccion) references mae_distrito (id_distrito)
 );
 
--- Tabla de proveedores
-CREATE TABLE MAE_PROVEEDOR (
-  ID_PROVEEDOR INTEGER PRIMARY KEY,
-  ID_TIPO_DOCUMENTO INTEGER NOT NULL,  
-  ID_DIRECCION INTEGER,
-  DIRECCION VARCHAR(200) NOT NULL,
-  NOMBRE VARCHAR(100) NOT NULL,
-  TELEFONO VARCHAR(12) NOT NULL,
-  CORREO VARCHAR(50),
-  FOREIGN KEY (ID_TIPO_DOCUMENTO) REFERENCES MAE_TIPO_DOCUMENTO (ID_TIPO_DOCUMENTO),
-  FOREIGN KEY (ID_DIRECCION) REFERENCES MAE_DIRECCION (ID_DIRECCION)
+create table mae_producto (
+  id_producto varchar(20) primary key not null,
+  id_unidad integer not null,
+  nombre varchar(255) not null,
+  descripcion text,
+  peso float not null,
+  foreign key (id_unidad) references mae_unidades (id_unidad)
 );
 
--- Tabla de productos
-CREATE TABLE MAE_PRODUCTO (
-  ID_PRODUCTO INTEGER PRIMARY KEY,
-  ID_UNIDAD INTEGER NOT NULL,
-  NOMBRE VARCHAR(255) NOT NULL,
-  DESCRIPCION TEXT,
-  PESO FLOAT NOT NULL,
-  FOREIGN KEY (ID_UNIDAD) REFERENCES MAE_UNIDADES (ID_UNIDAD)
+create table mae_cliente (
+  id_cliente varchar(20) primary key not null,
+  id_tipo_documento integer not null,
+  id_direccion integer not null,
+  direccion varchar(200) not null,
+  nombre varchar(20) not null,
+  telefono varchar(12) not null,
+  foreign key (id_tipo_documento) references mae_tipo_documento (id_tipo_documento),
+  foreign key (id_direccion) references mae_distrito (id_distrito)
 );
 
--- Tabla de clientes
-CREATE TABLE MAE_CLIENTE (
-  ID_CLIENTE INTEGER PRIMARY KEY,
-  ID_TIPO_DOCUMENTO INTEGER NOT NULL,
-  ID_DOCUMENTO INTEGER NOT NULL,
-  ID_DIRECCION INTEGER,
-  NUM_DOCUMENTO VARCHAR(50) NOT NULL,
-  DIRECCION VARCHAR(200) NOT NULL,
-  NOMBRE VARCHAR(100) NOT NULL,
-  TELEFONO VARCHAR(12) NOT NULL,
-  FOREIGN KEY (ID_TIPO_DOCUMENTO) REFERENCES MAE_TIPO_DOCUMENTO (ID_TIPO_DOCUMENTO),
-  FOREIGN KEY (ID_DIRECCION) REFERENCES MAE_DIRECCION (ID_DIRECCION)
+create table mae_transportista (
+  id_transportista varchar(20) primary key not null,
+  id_tipo_documento integer not null,
+  nombre varchar(20) not null,
+  apellido varchar(30) not null,
+  num_licencia varchar(15) not null,
+  foreign key (id_tipo_documento) references mae_tipo_documento (id_tipo_documento)
 );
 
--- Tabla de transportistas
-CREATE TABLE MAE_TRANSPORTISTA (
-  ID_TRANSPORTISTA INTEGER PRIMARY KEY,
-  ID_TIPO_DOCUMENTO INTEGER NOT NULL  ,
-  NOMBRE VARCHAR(50) NOT NULL,
-  APELLIDO VARCHAR(50) NOT NULL,
-  NUM_LICENCIA VARCHAR(10) NOT NULL,
-  FOREIGN KEY (ID_TIPO_DOCUMENTO) REFERENCES MAE_TIPO_DOCUMENTO (ID_TIPO_DOCUMENTO)
+create table mae_vehiculo (
+  id_vehiculo varchar(20) primary key not null,
+  categoria varchar(10) not null,
+  capacidad float not null,
+  ind_retorno boolean not null
 );
 
--- Tabla de vehículos
-CREATE TABLE MAE_VEHICULO (
-  ID_VEHICULO INTEGER PRIMARY KEY,
-  PLACA VARCHAR(10) NOT NULL,
-  CATEGORIA VARCHAR(10) NOT NULL,
-  CAPACIDAD FLOAT NOT NULL,
-  IND_RETORNO BOOLEAN NOT NULL
+create table mae_usuario (
+  id_usuario varchar(20) primary key not null,
+  id_tipo_documento integer not null,
+  nombre varchar(20) not null,
+  apellido varchar(20) not null,
+  contrasenia varchar(20) not null,
+  correo varchar(30) not null,
+  telefono varchar(20) not null,
+  foreign key (id_tipo_documento) references mae_tipo_documento (id_tipo_documento)
 );
 
--- Tabla de cabecera de guía de remisión
-CREATE TABLE TRS_CABECERA_GR (
-  ID_CABECERA INTEGER PRIMARY KEY,
-  ID_PROVEEDOR INTEGER NOT NULL,
-  ID_CLIENTE INTEGER NOT NULL,
-  ID_TRANSPORTISTA INTEGER NOT NULL,
-  ID_VEHICULO INTEGER NOT NULL,
-  NUM_GUIA VARCHAR(50) NOT NULL,
-  FECHA_EMI DATE NOT NULL,
-  HORA_EMI TIME NOT NULL,
-  MOTIVO_TRAS TEXT NOT NULL,
-  MODALIDAD VARCHAR(30) NOT NULL,
-  FOREIGN KEY (ID_PROVEEDOR) REFERENCES MAE_PROVEEDOR (ID_PROVEEDOR),
-  FOREIGN KEY (ID_CLIENTE) REFERENCES MAE_CLIENTE (ID_CLIENTE),
-  FOREIGN KEY (ID_TRANSPORTISTA) REFERENCES MAE_TRANSPORTISTA (ID_TRANSPORTISTA),
-  FOREIGN KEY (ID_VEHICULO) REFERENCES MAE_VEHICULO (ID_VEHICULO)
+create table trs_cabecera_gr (
+  id_cabecera serial primary key not null,
+  id_proveedor varchar(20) not null,
+  id_cliente varchar(20) not null,
+  id_transportista varchar(20) not null,
+  id_vehiculo varchar(20) not null,
+  num_factura varchar(10) not null,
+  fecha_emi date not null,
+  hora_emi time not null,
+  motivo_tras text not null,
+  modalidad varchar(30) not null,
+  foreign key (id_proveedor) references mae_proveedor (id_proveedor),
+  foreign key (id_cliente) references mae_cliente (id_cliente),
+  foreign key (id_transportista) references mae_transportista (id_transportista),
+  foreign key (id_vehiculo) references mae_vehiculo (id_vehiculo)
 );
 
--- Tabla de detalle de guía de remisión
-CREATE TABLE TRS_DETALLE_GR (
-  ID_CABECERA INTEGER NOT NULL,
-  ID_PRODUCTO INTEGER NOT NULL,
-  NUM_FACTURA VARCHAR(10) NOT NULL,
-  CANTIDAD_PROD INTEGER NOT NULL,
-  PESO_TOTAL FLOAT NOT NULL,
-  FOREIGN KEY (ID_CABECERA) REFERENCES TRS_CABECERA_GR (ID_CABECERA),
-  FOREIGN KEY (ID_PRODUCTO) REFERENCES MAE_PRODUCTO (ID_PRODUCTO)
+create table trs_detalle_gr (
+  id_cabecera integer not null,
+  id_producto varchar(20) not null,
+  cantidad_prod integer not null,
+  peso_total float not null,
+  foreign key (id_cabecera) references trs_cabecera_gr (id_cabecera),
+  foreign key (id_producto) references mae_producto (id_producto)
 );
