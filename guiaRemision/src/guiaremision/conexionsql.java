@@ -118,4 +118,19 @@ public class conexionsql {
         return producto;
     }
     
+    public boolean validarUsuario(String idUsuario, String contrasenia) {
+        String sql = "SELECT COUNT(*) FROM mae_usuario WHERE id_usuario = ? AND contrasenia = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, idUsuario);
+            stmt.setString(2, contrasenia);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next() && rs.getInt(1) > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
 }
