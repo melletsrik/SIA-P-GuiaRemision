@@ -1,12 +1,26 @@
 package guiaremision;
 
-public class GUI_Modalidad extends javax.swing.JFrame {
+import java.util.ArrayList;
 
+public class GUI_Modalidad extends javax.swing.JFrame {
+    
+    private conexionsql conexion;
+
+    private void llenarComboBox() {
+        ArrayList<String> tiposDocumentos = conexion.obtenerTiposDocumentos();
+        for (String tipo : tiposDocumentos) {
+            jComboBox4.addItem(tipo);
+            jComboBox3.addItem(tipo);
+        }
+    }
     /**
      * Creates new form GUI_Modalidad
      */
     public GUI_Modalidad() {
         initComponents();
+        conexion = new conexionsql();
+        conexion.conectar();
+        llenarComboBox();
     }
 
     /**
@@ -117,7 +131,7 @@ public class GUI_Modalidad extends javax.swing.JFrame {
             }
         });
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -418,7 +432,7 @@ public class GUI_Modalidad extends javax.swing.JFrame {
             }
         });
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);

@@ -1,17 +1,23 @@
 package guiaremision;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.util.ArrayList;
 
 public class GUI_Proveedor extends javax.swing.JFrame {
+    private conexionsql conexion;
 
-    /**
-     * Creates new form GUI_Proveedor
-     */
     public GUI_Proveedor() {
         initComponents();
+        conexion = new conexionsql();
+        conexion.conectar();
+        llenarComboBox();
     }
-
+    
+    private void llenarComboBox() {
+        ArrayList<String> tiposDocumentos = conexion.obtenerTiposDocumentos();
+        for (String tipo : tiposDocumentos) {
+            jComboBox1.addItem(tipo);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,7 +57,12 @@ public class GUI_Proveedor extends javax.swing.JFrame {
 
         jLabel2.setText("Tipo de documento:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Número documento:");
 
@@ -177,6 +188,11 @@ public class GUI_Proveedor extends javax.swing.JFrame {
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
