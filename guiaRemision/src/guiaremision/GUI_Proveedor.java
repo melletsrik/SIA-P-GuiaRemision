@@ -9,10 +9,10 @@ public class GUI_Proveedor extends javax.swing.JFrame {
         initComponents();
         conexion = new conexionsql();
         conexion.conectar();
-        llenarComboBox();
+        llenarTipoDocumento();
     }
     
-    private void llenarComboBox() {
+    private void llenarTipoDocumento() {
         ArrayList<String> tiposDocumentos = conexion.obtenerTiposDocumentos();
         for (String tipo : tiposDocumentos) {
             jComboBox1.addItem(tipo);
@@ -191,7 +191,7 @@ public class GUI_Proveedor extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
@@ -230,8 +230,6 @@ public class GUI_Proveedor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -240,8 +238,6 @@ public class GUI_Proveedor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField1;

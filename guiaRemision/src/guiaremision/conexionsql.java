@@ -86,4 +86,36 @@ public class conexionsql {
         }
         return distritos;
     }
+    
+    public ArrayList<String> obtenerUnidadesProducto() {
+        ArrayList<String> unidades = new ArrayList<>();
+        try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery("SELECT descripcion FROM mae_unidades")) {
+            while (rs.next()) {
+                unidades.add(rs.getString("descripcion"));
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al obtener unidades de productos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return unidades;
+    }
+
+    public String[] obtenerProductoPorCodigo(String codigoProducto) {
+        String[] producto = new String[2];
+        String query = "SELECT p.nombre, u.descripcion FROM mae_producto p JOIN mae_unidades u ON p.id_unidad = u.id_unidad WHERE p.id_producto = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, codigoProducto);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    producto[0] = rs.getString("nombre");
+                    producto[1] = rs.getString("descripcion");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Producto no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al obtener el producto: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return producto;
+    }
+    
 }

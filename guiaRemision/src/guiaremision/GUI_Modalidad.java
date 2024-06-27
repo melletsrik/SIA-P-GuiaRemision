@@ -6,21 +6,19 @@ public class GUI_Modalidad extends javax.swing.JFrame {
     
     private conexionsql conexion;
 
-    private void llenarComboBox() {
+    public GUI_Modalidad() {
+        initComponents();
+        conexion = new conexionsql();
+        conexion.conectar();
+        llenarTipoDocumento();
+    }
+    
+    private void llenarTipoDocumento() {
         ArrayList<String> tiposDocumentos = conexion.obtenerTiposDocumentos();
         for (String tipo : tiposDocumentos) {
             jComboBox4.addItem(tipo);
             jComboBox3.addItem(tipo);
         }
-    }
-    /**
-     * Creates new form GUI_Modalidad
-     */
-    public GUI_Modalidad() {
-        initComponents();
-        conexion = new conexionsql();
-        conexion.conectar();
-        llenarComboBox();
     }
 
     /**
@@ -391,7 +389,7 @@ public class GUI_Modalidad extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 314, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addContainerGap())
         );
@@ -500,10 +498,11 @@ public class GUI_Modalidad extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
