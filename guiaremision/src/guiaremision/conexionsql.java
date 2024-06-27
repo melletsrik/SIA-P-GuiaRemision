@@ -1,13 +1,12 @@
-
 package guiaremision;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import javax.swing.JOptionPane;
 
-public class test {
+public class conexionsql {
     Connection conn = null;
-    String url ="jdbc:postgresql::/192.168.1.100/db_guiaRemision";
+    String url ="jdbc:postgresql://localhost/db_guiaRemision";
     String usuario="postgres";
     String clave ="root";
     
@@ -30,5 +29,4 @@ public class test {
         }
     }
     
-  
 }
