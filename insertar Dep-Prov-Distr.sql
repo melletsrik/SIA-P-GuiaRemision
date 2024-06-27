@@ -427,3 +427,8 @@ insert into mae_producto (id_producto, id_unidad, nombre, descripcion, peso) val
 -- mae_usuario
 insert into mae_usuario (id_usuario, id_tipo_documento, nombre, apellido, contrasenia, correo, telefono) values 
 ('admin', 1, 'Administrador', 'Principal', 'password123', 'admin@example.com', '987654321');
+-- trs_sede_proveedor
+INSERT INTO trs_sede_proveedor (id_sede_proveedor, id_proveedor, id_distrito, discripcion) VALUES
+('SP001', '20123456789', 3, 'Real Plaza'),
+('SP002', '20123456789', 12, 'Mall Aventura'),
+('SP003', '20123456789', 7, 'Parque Lambramani');
