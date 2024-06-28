@@ -14,6 +14,7 @@ public class GUI_Doc_Puntos_Partida_Llegada extends javax.swing.JFrame {
         conexion = new conexionsql();
         conexion.conectar();
         loadDepartments(jComboBox3);
+        loadSedes(jComboBox6);
 
         // Add action listeners to load provinces based on the selected department
         jComboBox3.addActionListener(new ActionListener() {
@@ -62,6 +63,15 @@ public class GUI_Doc_Puntos_Partida_Llegada extends javax.swing.JFrame {
             }
         }
     }
+    
+    private void loadSedes(JComboBox<String> comboBox) {
+        ArrayList<String> sedes = conexion.obtenerSedes();
+        comboBox.removeAllItems();
+        for (String sede : sedes) {
+            comboBox.addItem(sede);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -251,7 +261,6 @@ public class GUI_Doc_Puntos_Partida_Llegada extends javax.swing.JFrame {
             }
         });
 
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Dirección Detallada:");
 
         jTextField3.addActionListener(new java.awt.event.ActionListener() {

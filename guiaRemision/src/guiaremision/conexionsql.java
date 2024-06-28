@@ -132,4 +132,15 @@ public class conexionsql {
         return false;
     }
     
+    public ArrayList<String> obtenerSedes() {
+        ArrayList<String> sedes = new ArrayList<>();
+        try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery("SELECT discripcion FROM trs_sede_proveedor")) {
+            while (rs.next()) {
+                sedes.add(rs.getString("discripcion"));
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al obtener sedes: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return sedes;
+    }
 }
