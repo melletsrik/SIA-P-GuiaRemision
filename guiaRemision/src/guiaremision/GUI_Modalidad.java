@@ -1,6 +1,7 @@
 package guiaremision;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class GUI_Modalidad extends javax.swing.JFrame {
     
@@ -565,10 +566,33 @@ public class GUI_Modalidad extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField11ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        GUI_Formato forma = new GUI_Formato();
-        forma.setModa(this);
-        forma.setVisible(true);
-        this.setVisible(false);
+        //Transporte Publico
+        String licenciaTransportista = jTextField11.getText();
+        String tipodocTransportista = (String) jComboBox3.getSelectedItem();
+        String numDocumento = jTextField12.getText();
+        String placaVehiculo = jTextField14.getText();
+        
+        //Transport Privado
+        String licenciaTransportistaPriv = jTextField16.getText();
+        String tipodocTransportistaPriv = (String) jComboBox4.getSelectedItem();
+        String numDocumentoPriv = jTextField17.getText();
+        String placaVehiculoPriv = jTextField15.getText();
+        
+        boolean publicTransportDataCorrect = conexion.authetication_ModalidadCheck(licenciaTransportista, tipodocTransportista, numDocumento, placaVehiculo);
+        boolean privateTransportDataCorrect = conexion.authetication_ModalidadCheck(licenciaTransportistaPriv, tipodocTransportistaPriv, numDocumentoPriv, placaVehiculoPriv);
+    
+        
+        
+        if(publicTransportDataCorrect || privateTransportDataCorrect){
+            GUI_Formato forma = new GUI_Formato();
+            forma.setModa(this);
+            forma.setVisible(true);
+            this.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Datos del Transportista/Vehículo incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField15ActionPerformed

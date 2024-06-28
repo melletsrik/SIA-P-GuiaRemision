@@ -421,3 +421,6 @@ INSERT INTO trs_sede_proveedor (id_sede_proveedor, id_proveedor, id_distrito, di
 ('SP001', '20123456789', 3, 'Real Plaza'),
 ('SP002', '20123456789', 12, 'Mall Aventura'),
 ('SP003', '20123456789', 7, 'Parque Lambramani');
+INSERT INTO mae_vehiculo (id_vehiculo, categoria, capacidad, ind_retorno) VALUES
+('ABC123', 'Camion', 10.5, TRUE),
+('XYZ789', 'Furgon', 5.0, FALSE);

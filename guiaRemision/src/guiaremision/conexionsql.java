@@ -169,11 +169,35 @@ public class conexionsql {
         return false;
     }
     public boolean verificarDatos(String... datos) {
-    for (String dato : datos) {
-        if (dato == null || dato.trim().isEmpty()) {
-            return false;
+        for (String dato : datos) {
+            if (dato == null || dato.trim().isEmpty()) {
+                return false;
+            }
         }
+        return true;
     }
-    return true;
-}
+    
+    public boolean authetication_ModalidadCheck(String licTransportista, String tipodoc, String numDoc, String placa) {
+        String sqlTransportista = "SELECT COUNT(*) FROM mae_transportista WHERE num_licencia = ? AND id_tipo_documento = (SELECT id_tipo_documento FROM mae_tipo_documento WHERE descripcion = ?) AND id_transportista = ?";
+        String sqlVehiculo = "SELECT COUNT(*) FROM mae_vehiculo WHERE id_vehiculo = ?";
+
+        try (PreparedStatement stmtTransportista = conn.prepareStatement(sqlTransportista);
+             PreparedStatement stmtVehiculo = conn.prepareStatement(sqlVehiculo)) {
+
+            stmtTransportista.setString(1, licTransportista);
+            stmtTransportista.setString(2, tipodoc);
+            stmtTransportista.setString(3, numDoc);
+            ResultSet rsTransportista = stmtTransportista.executeQuery();
+
+            stmtVehiculo.setString(1, placa);
+            ResultSet rsVehiculo = stmtVehiculo.executeQuery();
+
+            if (rsTransportista.next() && rsTransportista.getInt(1) > 0 && rsVehiculo.next() && rsVehiculo.getInt(1) > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al verificar Transportista/Vehiculo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return false;
+    }
 }
