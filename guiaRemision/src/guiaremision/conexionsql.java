@@ -109,6 +109,7 @@ public class conexionsql {
                     producto[1] = rs.getString("descripcion");
                 } else {
                     JOptionPane.showMessageDialog(null, "Producto no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
+                    return null;
                 }
             }
         } catch (SQLException e) {

@@ -1,5 +1,6 @@
 package guiaremision;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class GUI_Bienes extends javax.swing.JFrame {
@@ -31,15 +32,28 @@ public class GUI_Bienes extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         String codigoProducto = jTextField1.getText();
         String[] producto = conexion.obtenerProductoPorCodigo(codigoProducto);
-        String nombreProducto = producto[0];
-        String unidadProducto = producto[1];
-        String cantidad = jTextField2.getText();
-
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.addRow(new Object[]{codigoProducto, nombreProducto, unidadProducto, cantidad});
         
-        jTextField1.setText("");
-        jTextField2.setText("");
+        try{
+            int cantidadProd = Integer.valueOf(jTextField2.getText());
+            int pesoBrutoProd = Integer.valueOf(jTextField4.getText());
+            if( producto != null && cantidadProd > 0 && pesoBrutoProd > 0){
+                String nombreProducto = producto[0];
+                String unidadProducto = producto[1];
+                String cantidad = jTextField2.getText();
+
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                model.addRow(new Object[]{codigoProducto, nombreProducto, unidadProducto, cantidad});
+
+                jTextField1.setText("");
+                jTextField2.setText("");
+                jTextField4.setText("");
+            } else{
+                JOptionPane.showMessageDialog(this, "Producto o cantidad no validos.", "Error", JOptionPane.ERROR_MESSAGE);
+            } 
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Producto o cantidad o Peso bruto no validos.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
