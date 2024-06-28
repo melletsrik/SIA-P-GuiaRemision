@@ -225,6 +225,9 @@ public class GUI_Formato extends javax.swing.JFrame {
 
         // Mostrar detalles de productos en la tabla jTable1
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        String[] columnNames = {"Código del producto", "Nombre del producto", "Unidad del producto", "Cantidad"};
+        model.setRowCount(0);
+        jTable1.setModel(model);
         for (DetalleProducto detalle : GRC.getDetallesProductos()) {
             model.addRow(new Object[]{
                 detalle.getCodigoProducto(),
