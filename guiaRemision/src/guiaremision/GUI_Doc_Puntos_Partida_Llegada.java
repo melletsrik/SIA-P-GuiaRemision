@@ -399,7 +399,7 @@ public class GUI_Doc_Puntos_Partida_Llegada extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String tipoComprobante = (String) jComboBox1.getSelectedItem();
-        String Comprobante = jTextField1.getText();
+        String comprobante = jTextField1.getText();
         
         String sede = (String) jComboBox6.getSelectedItem();
         String direccionPartidaDetalle = jTextField3.getText();
@@ -410,9 +410,9 @@ public class GUI_Doc_Puntos_Partida_Llegada extends javax.swing.JFrame {
         String provincia = (String) jComboBox4.getSelectedItem();
         String distrito = (String) jComboBox5.getSelectedItem();
         
-        if (conexion.verificarDatos(Comprobante, direccionPartidaDetalle, direccionLlegadaDetalle, direccionLlegadaReferencia, tipoComprobante, distrito)) {
+        if (conexion.verificarDatos(comprobante, direccionPartidaDetalle, direccionLlegadaDetalle, direccionLlegadaReferencia, tipoComprobante, distrito)) {
             GRC.setTipoComprobante(tipoComprobante);
-            GRC.setComprobante(Comprobante);
+            GRC.setComprobante(comprobante);
             GRC.setSede(sede);
             GRC.setDireccionPartidaDetalle(direccionPartidaDetalle);
             GRC.setDireccionLlegadaDetalle(direccionLlegadaDetalle);
@@ -420,7 +420,7 @@ public class GUI_Doc_Puntos_Partida_Llegada extends javax.swing.JFrame {
             GRC.setDepartamento(departamento);
             GRC.setProvincia(provincia);
             GRC.setDistrito(distrito);
-            
+
             GUI_Modalidad modo = new GUI_Modalidad(GRC);
             modo.setDocs(this);
             modo.setVisible(true);
@@ -428,7 +428,6 @@ public class GUI_Doc_Puntos_Partida_Llegada extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Todos los campos deben estar llenos", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox6ActionPerformed

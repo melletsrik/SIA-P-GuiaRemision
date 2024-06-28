@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package guiaremision;
 
-/**
- *
- * @author Petunia
- */
 import javax.swing.table.DefaultTableModel;
 
 public class GUI_Formato extends javax.swing.JFrame {
@@ -50,10 +42,6 @@ public class GUI_Formato extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,14 +108,6 @@ public class GUI_Formato extends javax.swing.JFrame {
 
         jLabel9.setText("Fecha de Emision:");
 
-        jLabel12.setText("Departamento:");
-
-        jLabel13.setText("Provincia:");
-
-        jLabel14.setText("Distrito:");
-
-        jLabel6.setText("Punto de llegada:");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -137,39 +117,30 @@ public class GUI_Formato extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel7))
+                        .addGap(182, 182, 182))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(226, 226, 226))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel6))
-                                .addGap(182, 182, 182))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(226, 226, 226))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel12))
-                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,15 +165,7 @@ public class GUI_Formato extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel8))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel6))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel13)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(84, 84, 84)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,7 +193,17 @@ public class GUI_Formato extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        conexion.insertarCabeceraGR(
+        GRC.getId_proveedor(),  // idProveedor
+        GRC.getId_cliente(),               // idCliente
+        GRC.getLicenciaTransportista(),    // idTransportista
+        GRC.getId_vehiculo(),              // idVehiculo
+        GRC.getNum_factura(),              // numFactura
+        GRC.getFecha_emi(),                // fechaEmi
+        GRC.getHora_emi(),                 // horaEmi
+        GRC.getMotivo_tras(),              // motivoTras
+        GRC.getModalidad()                 // modalidad
+    );
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -241,21 +214,16 @@ public class GUI_Formato extends javax.swing.JFrame {
 
     private void mostrarDatos() {
         // Mostrar datos de GRC en los JLabel correspondientes
-        jLabel1.setText("Id. Guia de Remision: " + GRC.getId_cabecera());
         jLabel2.setText("Conductor: " + conexion.getNombreConductor(GRC.getId_transportista()));  // Ajusta según tus atributos
         jLabel3.setText("Licencia: " + GRC.getLicenciaTransportista());
         jLabel4.setText("Punto de partida: " + GRC.getDireccionPartidaDetalle());
         jLabel5.setText("Punto de llegada: " + GRC.getDireccionLlegadaDetalle());
-        jLabel6.setText("Modalidad: " + GRC.getModalidad());
         jLabel7.setText("Placa: " + GRC.getPlacaVehiculo());
         jLabel8.setText("Fecha de Emision: " + GRC.getFecha_emi().toString());  // Ajusta según el formato de fecha que necesites
-        jLabel9.setText("Comprobante: " + GRC.getComprobante());  // Ajusta según el formato de fecha que necesites
+        jLabel9.setText("Comprobante: " + GRC.getComprobante()); 
         jLabel10.setText("Proveedor: " + conexion.getNombreProveedor(GRC.getId_proveedor()));
         jLabel11.setText("Cliente: " + conexion.getNombreCliente(GRC.getId_cliente()));
-        jLabel12.setText("Departamento: " + GRC.getDepartamento());  // Ajusta según el formato de fecha que necesites
-        jLabel13.setText("Provincia: " + GRC.getProvincia());  // Ajusta según el formato de fecha que necesites
-        jLabel14.setText("Distrito: " + GRC.getDistrito());  // Ajusta según el formato de fecha que necesites
-        
+
         // Mostrar detalles de productos en la tabla jTable1
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         String[] columnNames = {"Código del producto", "Nombre del producto", "Unidad del producto", "Cantidad"};
@@ -277,14 +245,10 @@ public class GUI_Formato extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;

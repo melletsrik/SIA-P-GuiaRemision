@@ -177,30 +177,41 @@ public class conexionsql {
         return true;
     }
     
+
+    
     public boolean authetication_ModalidadCheck(String licTransportista, String tipodoc, String numDoc, String placa) {
-        String sqlTransportista = "SELECT COUNT(*) FROM mae_transportista WHERE num_licencia = ? AND id_tipo_documento = (SELECT id_tipo_documento FROM mae_tipo_documento WHERE descripcion = ?) AND id_transportista = ?";
+        String sqlTransportista = "SELECT COUNT(*) FROM mae_transportista WHERE id_transportista = ? AND id_tipo_documento = (SELECT id_tipo_documento FROM mae_tipo_documento WHERE descripcion = ?)";
         String sqlVehiculo = "SELECT COUNT(*) FROM mae_vehiculo WHERE id_vehiculo = ?";
 
         try (PreparedStatement stmtTransportista = conn.prepareStatement(sqlTransportista);
              PreparedStatement stmtVehiculo = conn.prepareStatement(sqlVehiculo)) {
 
-            stmtTransportista.setString(1, licTransportista);
-            stmtTransportista.setString(2, tipodoc);
-            stmtTransportista.setString(3, numDoc);
+            stmtTransportista.setString(1, numDoc); // id_transportista
+            stmtTransportista.setString(2, tipodoc); // tipo de documento
+
             ResultSet rsTransportista = stmtTransportista.executeQuery();
 
-            stmtVehiculo.setString(1, placa);
-            ResultSet rsVehiculo = stmtVehiculo.executeQuery();
+            if (rsTransportista.next() && rsTransportista.getInt(1) > 0) {
+                stmtVehiculo.setString(1, placa);
+                ResultSet rsVehiculo = stmtVehiculo.executeQuery();
 
-            if (rsTransportista.next() && rsTransportista.getInt(1) > 0 && rsVehiculo.next() && rsVehiculo.getInt(1) > 0) {
-                return true;
+                if (rsVehiculo.next() && rsVehiculo.getInt(1) > 0) {
+                    return true;
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se encontró el vehículo con placa " + placa, "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró el transportista con ID " + numDoc + " y tipo de documento " + tipodoc, "Error", JOptionPane.ERROR_MESSAGE);
             }
+
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al verificar Transportista/Vehiculo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al verificar Transportista/Vehículo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
         return false;
     }
-     public String getNombreConductor(String id_transportista) {
+
+    
+    public String getNombreConductor(String id_transportista) {
         conexionsql conexion = new conexionsql();
         conexion.conectar();
 
@@ -261,4 +272,49 @@ public class conexionsql {
 
         return nombreCliente;
     }
+    
+    public boolean insertarCabeceraGR(String idProveedor, String idCliente, String idTransportista, String idVehiculo, String comprobante, Date fechaEmi, Time horaEmi, String motivoTras, String modalidad) {
+    String sql = "INSERT INTO trs_cabecera_gr (id_proveedor, id_cliente, id_transportista, id_vehiculo, num_factura, fecha_emi, hora_emi, motivo_tras, modalidad) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    try (PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        stmt.setString(1, idProveedor);
+        stmt.setString(2, idCliente);
+        stmt.setString(3, idTransportista);
+        stmt.setString(4, idVehiculo);
+        stmt.setString(5, comprobante);
+        stmt.setDate(6, fechaEmi);
+        stmt.setTime(7, horaEmi);
+        stmt.setString(8, motivoTras);
+        stmt.setString(9, modalidad);
+        
+        int rowsInserted = stmt.executeUpdate();
+        if (rowsInserted > 0) {
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    return true; // Devuelve el id_cabecera generado
+                }
+            }
+        }
+        return false;
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al insertar en trs_cabecera_gr: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+}
+
+    public boolean insertarDetalleGR(int idCabecera, String idProducto, int cantidadProd, double pesoTotal) {
+        String sql = "INSERT INTO trs_detalle_gr (id_cabecera, id_producto, cantidad_prod, peso_total) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idCabecera);
+            stmt.setString(2, idProducto);
+            stmt.setInt(3, cantidadProd);
+            stmt.setDouble(4, pesoTotal);
+
+            int rowsInserted = stmt.executeUpdate();
+            return rowsInserted > 0;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al insertar en trs_detalle_gr: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    }
+
 }

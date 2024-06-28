@@ -22,6 +22,7 @@ public class GUI_Proveedor extends javax.swing.JFrame {
             jComboBox2.addItem(tipo);
         }
     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -268,7 +269,7 @@ public class GUI_Proveedor extends javax.swing.JFrame {
             GRC.setId_proveedor(docProveedor);
             GRC.setDescripcionProveedor(descripProveedor);
             GRC.setId_cliente(docCliente);
-            GRC.setModalidad(docCliente);
+            GRC.setMotivo_tras(MotivoTraslado);
             GUI_Bienes bien = new GUI_Bienes(GRC);
             bien.setProv(this);
             bien.setVisible(true);

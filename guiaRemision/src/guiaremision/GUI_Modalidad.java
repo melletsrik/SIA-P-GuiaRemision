@@ -2,7 +2,6 @@ package guiaremision;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import java.util.Date;
 
 public class GUI_Modalidad extends javax.swing.JFrame {
     
@@ -156,7 +155,7 @@ public class GUI_Modalidad extends javax.swing.JFrame {
                                     .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(jPanel11Layout.createSequentialGroup()
                                         .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 115, Short.MAX_VALUE))
+                                        .addGap(0, 109, Short.MAX_VALUE))
                                     .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                             .addGroup(jPanel11Layout.createSequentialGroup()
@@ -467,7 +466,7 @@ public class GUI_Modalidad extends javax.swing.JFrame {
                                     .addComponent(jLabel32, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(jPanel14Layout.createSequentialGroup()
                                         .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 115, Short.MAX_VALUE))
+                                        .addGap(0, 109, Short.MAX_VALUE))
                                     .addComponent(jLabel34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                             .addGroup(jPanel14Layout.createSequentialGroup()
@@ -539,8 +538,9 @@ public class GUI_Modalidad extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jTabbedPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -569,34 +569,32 @@ public class GUI_Modalidad extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         //Transporte Publico
-        String licenciaTransportista = jTextField11.getText();
-        String tipodocTransportista = (String) jComboBox3.getSelectedItem();
-        String numDocumento = jTextField12.getText();
-        String placaVehiculo = jTextField14.getText();
-        Date fecha = jDateChooser2.getDate();
+        int selectedIndex = jTabbedPane1.getSelectedIndex();
         
-        
-        boolean publicTransportDataCorrect = conexion.authetication_ModalidadCheck(licenciaTransportista, tipodocTransportista, numDocumento, placaVehiculo);
-        
-        
-        
-        if(publicTransportDataCorrect){
-            
-            GRC.setId_transportista(numDocumento);
-            GRC.setLicenciaTransportista(licenciaTransportista);
-            GRC.setPlacaVehiculo(placaVehiculo);
-            GRC.setFecha_emi(fecha);
-            GRC.setModalidad(new String("Publico"));
-            
-            GUI_Formato forma = new GUI_Formato(GRC);
-            forma.setModa(this);
-            forma.setVisible(true);
-            this.setVisible(false);
-        } else {
-            JOptionPane.showMessageDialog(null, "Datos del Transportista/Vehículo incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
+        if (selectedIndex == 0) {
+            String licenciaTransportista = jTextField11.getText();
+            String tipodocTransportista = (String) jComboBox3.getSelectedItem();
+            String id_transportista = jTextField12.getText();
+            String placaVehiculo = jTextField14.getText();
+            java.sql.Date fecha = new java.sql.Date(jDateChooser2.getDate().getTime());
+
+            boolean publicTransportDataCorrect = conexion.authetication_ModalidadCheck(licenciaTransportista, tipodocTransportista, id_transportista, placaVehiculo);
+
+            if(publicTransportDataCorrect){
+                GRC.setModalidad("Público");
+                GRC.setId_transportista(id_transportista);
+                GRC.setLicenciaTransportista(licenciaTransportista);
+                GRC.setPlacaVehiculo(placaVehiculo);
+                GRC.setFecha_emi(fecha);
+
+                GUI_Formato forma = new GUI_Formato(GRC);
+                forma.setModa(this);
+                forma.setVisible(true);
+                this.setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(null, "Datos del Transportista/Vehículo incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
-        
-        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField15ActionPerformed
@@ -605,29 +603,46 @@ public class GUI_Modalidad extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         //Transport Privado
-        String licenciaTransportistaPriv = jTextField16.getText();
-        String tipodocTransportistaPriv = (String) jComboBox4.getSelectedItem();
-        String numDocumentoPriv = jTextField17.getText();
-        String placaVehiculoPriv = jTextField15.getText();
-        Date fechaPriv = jDateChooser1.getDate();
-        
-        boolean privateTransportDataCorrect = conexion.authetication_ModalidadCheck(licenciaTransportistaPriv, tipodocTransportistaPriv, numDocumentoPriv, placaVehiculoPriv);
-    
-        
-        
-        if(privateTransportDataCorrect){
-            
-            GRC.setId_transportista(numDocumentoPriv);
-            GRC.setLicenciaTransportista(licenciaTransportistaPriv);
-            GRC.setPlacaVehiculo(placaVehiculoPriv);
-            GRC.setFecha_emi(fechaPriv);
-            GRC.setModalidad(new String("Privado"));
-            GUI_Formato forma = new GUI_Formato(GRC);
-            forma.setModa(this);
-            forma.setVisible(true);
-            this.setVisible(false);
-        } else {
-            JOptionPane.showMessageDialog(null, "Datos del Transportista/Vehículo incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
+        int selectedIndex = jTabbedPane1.getSelectedIndex();
+        if (selectedIndex == 1) {
+            String licenciaTransportistaPriv = jTextField16.getText();
+            String tipodocTransportistaPriv = (String) jComboBox4.getSelectedItem();
+            String numDocumentoPriv = jTextField17.getText();
+            String placaVehiculoPriv = jTextField15.getText();
+            java.sql.Date fechaPriv = new java.sql.Date(jDateChooser1.getDate().getTime()); 
+
+            boolean privateTransportDataCorrect = conexion.authetication_ModalidadCheck(licenciaTransportistaPriv, tipodocTransportistaPriv, numDocumentoPriv, placaVehiculoPriv);
+            if (privateTransportDataCorrect) {
+                GRC.setModalidad("Privado");
+                GRC.setId_transportista(numDocumentoPriv);
+                GRC.setLicenciaTransportista(licenciaTransportistaPriv);
+                GRC.setPlacaVehiculo(placaVehiculoPriv);
+                GRC.setFecha_emi(fechaPriv);
+                
+                boolean inserted = conexion.insertarCabeceraGR(
+                        
+                        GRC.getId_proveedor(),
+                        GRC.getId_cliente(),
+                        GRC.getId_transportista(),
+                        GRC.getId_vehiculo(),
+                        GRC.getNum_factura(),
+                        GRC.getFecha_emi(),
+                        GRC.getHora_emi(),
+                        GRC.getMotivo_tras(),
+                        GRC.getModalidad());
+
+                if (inserted) {
+                    JOptionPane.showMessageDialog(null, "Datos insertados correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    GUI_Formato forma = new GUI_Formato(GRC);
+                    forma.setModa(this);
+                    forma.setVisible(true);
+                    this.setVisible(false);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error al insertar datos", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Datos del Transportista/Vehículo incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
