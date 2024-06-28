@@ -376,7 +376,7 @@ insert into mae_transportista (id_transportista, id_tipo_documento, nombre, apel
 ('23456789', 1, 'Juan', 'Ramirez', 'D2345678'),
 ('98765432', 1, 'Pedro', 'Martinez', 'E8765432');
 -- mae_cliente
-insert into mae_cliente (id_cliente, id_tipo_documento, id_direccion, direccion, nombre, telefono) values 
+insert into mae_cliente (id_cliente, id_tipo_documento, id_distrito, direccion, nombre, telefono) values 
 ('87654321', 1, 1, 'Av. Larco 123', 'Ana Lopez', '987654321'),
 ('12345678', 1, 2, 'Jr. Puno 456', 'Maria Fernandez', '876543210'),
 ('23456789', 1, 3, 'Calle Lima 789', 'Jose Rojas', '765432109'),
