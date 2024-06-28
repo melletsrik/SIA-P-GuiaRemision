@@ -216,8 +216,6 @@ public class conexionsql {
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al obtener el nombre del conductor: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            conexion.cerrar();
         }
 
         return nombreConductor;
@@ -238,8 +236,6 @@ public class conexionsql {
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al obtener el nombre del proveedor: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            conexion.cerrar();
         }
 
         return nombreProveedor;
@@ -261,8 +257,6 @@ public class conexionsql {
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al obtener el nombre del cliente: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            conexion.cerrar();
         }
 
         return nombreCliente;
