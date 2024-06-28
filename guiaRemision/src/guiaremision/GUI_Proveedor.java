@@ -1,6 +1,7 @@
 package guiaremision;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class GUI_Proveedor extends javax.swing.JFrame {
     private conexionsql conexion;
@@ -252,10 +253,24 @@ public class GUI_Proveedor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        GUI_Bienes bien = new GUI_Bienes();
-        bien.setProv(this);
-        bien.setVisible(true);
-        this.setVisible(false);
+        String docProveedor = jTextField1.getText();
+        String descripProveedor = jTextField2.getText();
+        String docCliente = jTextField3.getText();
+        String MotivoTraslado= jTextArea1.getText();
+        
+        String tipoDocProveedor = (String) jComboBox1.getSelectedItem();
+        String tipoDocCliente = (String) jComboBox2.getSelectedItem();
+        
+        
+        if (conexion.authetication_ProveedorCheck(docProveedor, docCliente, tipoDocProveedor, tipoDocCliente)) {
+            GUI_Bienes bien = new GUI_Bienes();
+            bien.setProv(this);
+            bien.setVisible(true);
+            this.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Proveedor o Cliente no encontrado o tipos de documentos no coinciden", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed

@@ -143,4 +143,28 @@ public class conexionsql {
         }
         return sedes;
     }
+    
+    public boolean authetication_ProveedorCheck(String docProveedor, String docCliente, String tipoDocProveedor, String tipoDocCliente) {
+        String sqlProveedor = "SELECT COUNT(*) FROM mae_proveedor WHERE id_proveedor = ? AND id_tipo_documento = (SELECT id_tipo_documento FROM mae_tipo_documento WHERE descripcion = ?)";
+        String sqlCliente = "SELECT COUNT(*) FROM mae_cliente WHERE id_cliente = ? AND id_tipo_documento = (SELECT id_tipo_documento FROM mae_tipo_documento WHERE descripcion = ?)";
+        
+        try (PreparedStatement stmtProveedor = conn.prepareStatement(sqlProveedor);
+             PreparedStatement stmtCliente = conn.prepareStatement(sqlCliente)) {
+             
+            stmtProveedor.setString(1, docProveedor);
+            stmtProveedor.setString(2, tipoDocProveedor);
+            ResultSet rsProveedor = stmtProveedor.executeQuery();
+            
+            stmtCliente.setString(1, docCliente);
+            stmtCliente.setString(2, tipoDocCliente);
+            ResultSet rsCliente = stmtCliente.executeQuery();
+            
+            if (rsProveedor.next() && rsProveedor.getInt(1) > 0 && rsCliente.next() && rsCliente.getInt(1) > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al verificar proveedor/cliente: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return false;
+    }
 }
