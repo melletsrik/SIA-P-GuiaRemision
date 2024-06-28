@@ -2,12 +2,15 @@ package guiaremision;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
 
 public class GUI_Bienes extends javax.swing.JFrame {
     private conexionsql conexion;
     private GUI_Proveedor prov;
+    private GuiaDeRemision GRC;
     
-    public GUI_Bienes() {
+    public GUI_Bienes(GuiaDeRemision GRC) {
+        this.GRC = GRC;
         initComponents();
         conexion = new conexionsql();
         conexion.conectar();
@@ -267,7 +270,30 @@ public class GUI_Bienes extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (jTable1.getRowCount() > 0) {
-            GUI_Doc_Puntos_Partida_Llegada docs = new GUI_Doc_Puntos_Partida_Llegada();
+            ArrayList<DetalleProducto> detallesProductos = new ArrayList<>();
+        
+            // Recorrer jTable1 y agregar cada fila a la lista de detallesProductos
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            for (int i = 0; i < model.getRowCount(); i++) {
+                String codigoProducto = (String) model.getValueAt(i, 0);
+                String nombreProducto = (String) model.getValueAt(i, 1);
+                String unidadProducto = (String) model.getValueAt(i, 2);
+                String cantidadStr = (String) model.getValueAt(i, 3);
+                int cantidad = 0;
+                try {
+                    cantidad = Integer.parseInt(cantidadStr);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Error al obtener cantidad del producto.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return; // Salir del método si hay un error
+                }
+
+                DetalleProducto detalle = new DetalleProducto(codigoProducto, nombreProducto, unidadProducto, cantidad);
+                detallesProductos.add(detalle);
+            }
+
+            // Asignar la lista de detallesProductos a GRC
+            GRC.setDetallesProductos(detallesProductos);
+            GUI_Doc_Puntos_Partida_Llegada docs = new GUI_Doc_Puntos_Partida_Llegada(GRC);
             docs.setBien(this);
             docs.setVisible(true);
             this.setVisible(false);

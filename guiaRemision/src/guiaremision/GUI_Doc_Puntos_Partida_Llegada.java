@@ -10,7 +10,9 @@ public class GUI_Doc_Puntos_Partida_Llegada extends javax.swing.JFrame {
 
     private conexionsql conexion;
     private GUI_Bienes bien;
-    public GUI_Doc_Puntos_Partida_Llegada() {
+    private GuiaDeRemision GRC;
+    public GUI_Doc_Puntos_Partida_Llegada(GuiaDeRemision GRC) {
+        this.GRC = GRC;
         initComponents();
         conexion = new conexionsql();
         conexion.conectar();
@@ -396,15 +398,30 @@ public class GUI_Doc_Puntos_Partida_Llegada extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        String tipoComprobante = (String) jComboBox1.getSelectedItem();
         String Comprobante = jTextField1.getText();
+        
+        String sede = (String) jComboBox6.getSelectedItem();
         String direccionPartidaDetalle = jTextField2.getText();
         String direccionLlegadaDetalle = jTextField2.getText();
         String direccionLlegadaReferencia = jTextField4.getText();
-        String tipoDocProveedor = (String) jComboBox6.getSelectedItem();
+        
+        String departamento = (String) jComboBox3.getSelectedItem();
+        String provincia = (String) jComboBox4.getSelectedItem();
         String distrito = (String) jComboBox5.getSelectedItem();
         
-        if (conexion.verificarDatos(Comprobante, direccionPartidaDetalle, direccionLlegadaDetalle, direccionLlegadaReferencia, tipoDocProveedor, distrito)) {
-            GUI_Modalidad modo = new GUI_Modalidad();
+        if (conexion.verificarDatos(Comprobante, direccionPartidaDetalle, direccionLlegadaDetalle, direccionLlegadaReferencia, tipoComprobante, distrito)) {
+            GRC.setTipoComprobante(tipoComprobante);
+            GRC.setComprobante(Comprobante);
+            GRC.setSede(sede);
+            GRC.setDireccionPartidaDetalle(direccionPartidaDetalle);
+            GRC.setDireccionLlegadaDetalle(direccionLlegadaDetalle);
+            GRC.setDireccionLlegadaReferencia(direccionLlegadaReferencia);
+            GRC.setDepartamento(departamento);
+            GRC.setProvincia(provincia);
+            GRC.setDistrito(distrito);
+            
+            GUI_Modalidad modo = new GUI_Modalidad(GRC);
             modo.setDocs(this);
             modo.setVisible(true);
             this.setVisible(false);

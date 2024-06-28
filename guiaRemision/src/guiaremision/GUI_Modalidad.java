@@ -2,13 +2,15 @@ package guiaremision;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import java.util.Date;
 
 public class GUI_Modalidad extends javax.swing.JFrame {
     
     private conexionsql conexion;
     private GUI_Doc_Puntos_Partida_Llegada docs;
-
-    public GUI_Modalidad() {
+    private GuiaDeRemision GRC;
+    public GUI_Modalidad(GuiaDeRemision GRC) {
+        this.GRC = GRC;
         initComponents();
         conexion = new conexionsql();
         conexion.conectar();
@@ -571,20 +573,21 @@ public class GUI_Modalidad extends javax.swing.JFrame {
         String tipodocTransportista = (String) jComboBox3.getSelectedItem();
         String numDocumento = jTextField12.getText();
         String placaVehiculo = jTextField14.getText();
+        Date fecha = jDateChooser2.getDate();
         
-        //Transport Privado
-        String licenciaTransportistaPriv = jTextField16.getText();
-        String tipodocTransportistaPriv = (String) jComboBox4.getSelectedItem();
-        String numDocumentoPriv = jTextField17.getText();
-        String placaVehiculoPriv = jTextField15.getText();
         
         boolean publicTransportDataCorrect = conexion.authetication_ModalidadCheck(licenciaTransportista, tipodocTransportista, numDocumento, placaVehiculo);
-        boolean privateTransportDataCorrect = conexion.authetication_ModalidadCheck(licenciaTransportistaPriv, tipodocTransportistaPriv, numDocumentoPriv, placaVehiculoPriv);
-    
         
         
-        if(publicTransportDataCorrect || privateTransportDataCorrect){
-            GUI_Formato forma = new GUI_Formato();
+        
+        if(publicTransportDataCorrect){
+            
+            GRC.setId_transportista(numDocumento);
+            GRC.setLicenciaTransportista(licenciaTransportista);
+            GRC.setPlacaVehiculo(placaVehiculo);
+            GRC.setFecha_emi(fecha);
+            
+            GUI_Formato forma = new GUI_Formato(GRC);
             forma.setModa(this);
             forma.setVisible(true);
             this.setVisible(false);
@@ -600,10 +603,31 @@ public class GUI_Modalidad extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField15ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        GUI_Formato forma = new GUI_Formato();
-        forma.setModa(this);
-        forma.setVisible(true);
-        this.setVisible(false);
+        //Transport Privado
+        String licenciaTransportistaPriv = jTextField16.getText();
+        String tipodocTransportistaPriv = (String) jComboBox4.getSelectedItem();
+        String numDocumentoPriv = jTextField17.getText();
+        String placaVehiculoPriv = jTextField15.getText();
+        Date fechaPriv = jDateChooser1.getDate();
+        
+        boolean privateTransportDataCorrect = conexion.authetication_ModalidadCheck(licenciaTransportistaPriv, tipodocTransportistaPriv, numDocumentoPriv, placaVehiculoPriv);
+    
+        
+        
+        if(privateTransportDataCorrect){
+            
+            GRC.setId_transportista(numDocumentoPriv);
+            GRC.setLicenciaTransportista(licenciaTransportistaPriv);
+            GRC.setPlacaVehiculo(placaVehiculoPriv);
+            GRC.setFecha_emi(fechaPriv);
+            
+            GUI_Formato forma = new GUI_Formato(GRC);
+            forma.setModa(this);
+            forma.setVisible(true);
+            this.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Datos del Transportista/Vehículo incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField16ActionPerformed

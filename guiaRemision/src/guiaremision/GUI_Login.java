@@ -148,7 +148,8 @@ public class GUI_Login extends javax.swing.JFrame {
         String contrasenia = new String(jPasswordField1.getPassword());
         
         if (conexion.validarUsuario(usuario, contrasenia)) {
-            GUI_Proveedor prov = new GUI_Proveedor();
+            GuiaDeRemision GRC = new GuiaDeRemision();
+            GUI_Proveedor prov = new GUI_Proveedor(GRC);
             prov.setVisible(true);
             this.setVisible(false);
         } else {

@@ -5,8 +5,10 @@ import javax.swing.JOptionPane;
 
 public class GUI_Proveedor extends javax.swing.JFrame {
     private conexionsql conexion;
+    private GuiaDeRemision GRC;
 
-    public GUI_Proveedor() {
+    public GUI_Proveedor(GuiaDeRemision GRC) {
+        this.GRC = GRC;
         initComponents();
         conexion = new conexionsql();
         conexion.conectar();
@@ -263,7 +265,11 @@ public class GUI_Proveedor extends javax.swing.JFrame {
         
         
         if (conexion.authetication_ProveedorCheck(docProveedor, docCliente, tipoDocProveedor, tipoDocCliente)) {
-            GUI_Bienes bien = new GUI_Bienes();
+            GRC.setId_proveedor(docProveedor);
+            GRC.setDescripcionProveedor(descripProveedor);
+            GRC.setId_cliente(docCliente);
+            GRC.setModalidad(docCliente);
+            GUI_Bienes bien = new GUI_Bienes(GRC);
             bien.setProv(this);
             bien.setVisible(true);
             this.setVisible(false);
