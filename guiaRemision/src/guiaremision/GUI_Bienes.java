@@ -266,10 +266,15 @@ public class GUI_Bienes extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        GUI_Doc_Puntos_Partida_Llegada docs = new GUI_Doc_Puntos_Partida_Llegada();
-        docs.setBien(this);
-        docs.setVisible(true);
-        this.setVisible(false);
+        if (jTable1.getRowCount() > 0) {
+            GUI_Doc_Puntos_Partida_Llegada docs = new GUI_Doc_Puntos_Partida_Llegada();
+            docs.setBien(this);
+            docs.setVisible(true);
+            this.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese almenos 1 producto a la lista", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
