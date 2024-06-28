@@ -27,13 +27,13 @@ create table mae_unidades (
   descripcion varchar(50) not null
 );
 
-CREATE TABLE mae_proveedor (
-  id_proveedor varchar(20) PRIMARY KEY NOT NULL,
-  id_tipo_documento integer NOT NULL,
-  nombre varchar(20) NOT NULL,
-  telefono varchar(12) NOT NULL,
+create table mae_proveedor (
+  id_proveedor varchar(20) primary key not null,
+  id_tipo_documento integer not null,
+  nombre varchar(20) not null,
+  telefono varchar(12) not null,
   correo varchar(50),
-  FOREIGN KEY (id_tipo_documento) REFERENCES mae_tipo_documento (id_tipo_documento)
+  foreign key (id_tipo_documento) references mae_tipo_documento (id_tipo_documento)
 );
 
 create table mae_producto (
@@ -48,12 +48,12 @@ create table mae_producto (
 create table mae_cliente (
   id_cliente varchar(20) primary key not null,
   id_tipo_documento integer not null,
-  id_direccion integer not null,
+  id_distrito integer not null,
   direccion varchar(200) not null,
   nombre varchar(20) not null,
   telefono varchar(12) not null,
   foreign key (id_tipo_documento) references mae_tipo_documento (id_tipo_documento),
-  foreign key (id_direccion) references mae_distrito (id_distrito)
+  foreign key (id_distrito) references mae_distrito (id_distrito)
 );
 
 create table mae_transportista (
@@ -83,30 +83,30 @@ create table mae_usuario (
   foreign key (id_tipo_documento) references mae_tipo_documento (id_tipo_documento)
 );
 
-CREATE TABLE trs_sede_proveedor (
-  id_sede_proveedor varchar(10) PRIMARY KEY NOT NULL,
-  id_proveedor varchar(20) NOT NULL,
-  id_distrito integer NOT NULL,
-  discripcion varchar(30) NOT NULL,
-  FOREIGN KEY (id_proveedor) REFERENCES mae_proveedor (id_proveedor),
-  FOREIGN KEY (id_distrito) REFERENCES mae_distrito (id_distrito)
+create table trs_sede_proveedor (
+  id_sede_proveedor varchar(10) primary key not null,
+  id_proveedor varchar(20) not null,
+  id_distrito integer not null,
+  discripcion varchar(30) not null,
+  foreign key (id_proveedor) references mae_proveedor (id_proveedor),
+  foreign key (id_distrito) references mae_distrito (id_distrito)
 );
 
-CREATE TABLE trs_cabecera_gr (
-  id_cabecera integer PRIMARY KEY NOT NULL,
-  id_proveedor varchar(20) NOT NULL,
-  id_cliente varchar(20) NOT NULL,
-  id_transportista varchar(20) NOT NULL,
-  id_vehiculo varchar(20) NOT NULL,
-  num_factura varchar(10) NOT NULL,
-  fecha_emi date NOT NULL,
-  hora_emi time NOT NULL,
-  motivo_tras text NOT NULL,
-  modalidad varchar(30) NOT NULL,
-  FOREIGN KEY (id_proveedor) REFERENCES mae_proveedor (id_proveedor),
-  FOREIGN KEY (id_cliente) REFERENCES mae_cliente (id_cliente),
-  FOREIGN KEY (id_transportista) REFERENCES mae_transportista (id_transportista),
-  FOREIGN KEY (id_vehiculo) REFERENCES mae_vehiculo (id_vehiculo)
+create table trs_cabecera_gr (
+  id_cabecera serial primary key not null,
+  id_proveedor varchar(20) not null,
+  id_cliente varchar(20) not null,
+  id_transportista varchar(20) not null,
+  id_vehiculo varchar(20) not null,
+  num_factura varchar(10) not null,
+  fecha_emi date not null,
+  hora_emi time not null,
+  motivo_tras text not null,
+  modalidad varchar(30) not null,
+  foreign key (id_proveedor) references mae_proveedor (id_proveedor),
+  foreign key (id_cliente) references mae_cliente (id_cliente),
+  foreign key (id_transportista) references mae_transportista (id_transportista),
+  foreign key (id_vehiculo) references mae_vehiculo (id_vehiculo)
 );
 
 create table trs_detalle_gr (
