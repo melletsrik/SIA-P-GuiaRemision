@@ -586,6 +586,7 @@ public class GUI_Modalidad extends javax.swing.JFrame {
             GRC.setLicenciaTransportista(licenciaTransportista);
             GRC.setPlacaVehiculo(placaVehiculo);
             GRC.setFecha_emi(fecha);
+            GRC.setModalidad(new String("Publico"));
             
             GUI_Formato forma = new GUI_Formato(GRC);
             forma.setModa(this);
@@ -620,7 +621,7 @@ public class GUI_Modalidad extends javax.swing.JFrame {
             GRC.setLicenciaTransportista(licenciaTransportistaPriv);
             GRC.setPlacaVehiculo(placaVehiculoPriv);
             GRC.setFecha_emi(fechaPriv);
-            
+            GRC.setModalidad(new String("Privado"));
             GUI_Formato forma = new GUI_Formato(GRC);
             forma.setModa(this);
             forma.setVisible(true);
