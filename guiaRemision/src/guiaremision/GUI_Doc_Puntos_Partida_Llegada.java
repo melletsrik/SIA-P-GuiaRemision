@@ -402,7 +402,7 @@ public class GUI_Doc_Puntos_Partida_Llegada extends javax.swing.JFrame {
         String Comprobante = jTextField1.getText();
         
         String sede = (String) jComboBox6.getSelectedItem();
-        String direccionPartidaDetalle = jTextField2.getText();
+        String direccionPartidaDetalle = jTextField3.getText();
         String direccionLlegadaDetalle = jTextField2.getText();
         String direccionLlegadaReferencia = jTextField4.getText();
         

@@ -200,4 +200,71 @@ public class conexionsql {
         }
         return false;
     }
+     public String getNombreConductor(String id_transportista) {
+        conexionsql conexion = new conexionsql();
+        conexion.conectar();
+
+        String nombreConductor = null;
+        String query = "SELECT nombre FROM mae_transportista WHERE id_transportista = ?";
+        try (PreparedStatement stmt = conexion.conn.prepareStatement(query)) {
+            stmt.setString(1, id_transportista);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                nombreConductor = rs.getString("nombre");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró el conductor con ID: " + id_transportista, "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al obtener el nombre del conductor: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            conexion.cerrar();
+        }
+
+        return nombreConductor;
+    }
+    public String getNombreProveedor(String id_proveedor) {
+        conexionsql conexion = new conexionsql();
+        conexion.conectar();
+
+        String nombreProveedor = null;
+        String query = "SELECT nombre FROM mae_proveedor WHERE id_proveedor = ?";
+        try (PreparedStatement stmt = conexion.conn.prepareStatement(query)) {
+            stmt.setString(1, id_proveedor);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                nombreProveedor = rs.getString("nombre");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró el proveedor con ID: " + id_proveedor, "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al obtener el nombre del proveedor: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            conexion.cerrar();
+        }
+
+        return nombreProveedor;
+    }
+    
+    public String getNombreCliente(String id_cliente) {
+        conexionsql conexion = new conexionsql();
+        conexion.conectar();
+
+        String nombreCliente = null;
+        String query = "SELECT nombre FROM mae_cliente WHERE id_cliente = ?";
+        try (PreparedStatement stmt = conexion.conn.prepareStatement(query)) {
+            stmt.setString(1, id_cliente);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                nombreCliente = rs.getString("nombre");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró el cliente con ID: " + id_cliente, "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al obtener el nombre del cliente: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            conexion.cerrar();
+        }
+
+        return nombreCliente;
+    }
 }
