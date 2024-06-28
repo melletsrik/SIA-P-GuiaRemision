@@ -35,6 +35,9 @@ public class GuiaDeRemision{
         private String hora_emi;
         private String motivo_tras;
         private String modalidad;
+        private String licenciaTransportista;
+        private String placaVehiculo;
+        
 
     public void setDetallesProductos(ArrayList<DetalleProducto> DetallesProductos) {
         this.DetallesProductos = DetallesProductos;
@@ -122,6 +125,14 @@ public class GuiaDeRemision{
 
         public void setDistrito(String distrito) {
             this.distrito = distrito;
+        }
+
+        public void setLicenciaTransportista(String licenciaTransportista) {
+            this.licenciaTransportista = licenciaTransportista;
+        }
+
+        public void setPlacaVehiculo(String placaVehiculo) {
+            this.placaVehiculo = placaVehiculo;
         }
 
     }
