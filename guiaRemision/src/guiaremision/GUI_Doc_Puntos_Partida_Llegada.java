@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 public class GUI_Doc_Puntos_Partida_Llegada extends javax.swing.JFrame {
 
@@ -395,10 +396,22 @@ public class GUI_Doc_Puntos_Partida_Llegada extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        GUI_Modalidad modo = new GUI_Modalidad();
-        modo.setDocs(this);
-        modo.setVisible(true);
-        this.setVisible(false);
+        String Comprobante = jTextField1.getText();
+        String direccionPartidaDetalle = jTextField2.getText();
+        String direccionLlegadaDetalle = jTextField2.getText();
+        String direccionLlegadaReferencia = jTextField4.getText();
+        String tipoDocProveedor = (String) jComboBox6.getSelectedItem();
+        String distrito = (String) jComboBox5.getSelectedItem();
+        
+        if (conexion.verificarDatos(Comprobante, direccionPartidaDetalle, direccionLlegadaDetalle, direccionLlegadaReferencia, tipoDocProveedor, distrito)) {
+            GUI_Modalidad modo = new GUI_Modalidad();
+            modo.setDocs(this);
+            modo.setVisible(true);
+            this.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Todos los campos deben estar llenos", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox6ActionPerformed

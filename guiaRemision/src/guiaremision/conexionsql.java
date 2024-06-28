@@ -168,4 +168,12 @@ public class conexionsql {
         }
         return false;
     }
+    public boolean verificarDatos(String... datos) {
+    for (String dato : datos) {
+        if (dato == null || dato.trim().isEmpty()) {
+            return false;
+        }
+    }
+    return true;
+}
 }
